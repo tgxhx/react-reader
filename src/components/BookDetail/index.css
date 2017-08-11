@@ -1,0 +1,151 @@
+.book-detail {
+  padding: 0 0.4rem; }
+
+.loading {
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  z-index: 999;
+  background-color: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center; }
+
+.detail-linear {
+  background: -webkit-linear-gradient(bottom, #fff, rgba(255, 255, 255, 0) 2.16rem) no-repeat center bottom;
+  background: linear-gradient(to top, #fff, rgba(255, 255, 255, 0) 8rem) no-repeat center bottom; }
+  .detail-linear .detail-top {
+    position: fixed;
+    display: flex;
+    justify-content: space-between;
+    left: 0;
+    top: 0;
+    right: 0;
+    height: 1rem;
+    background-color: #eee; }
+    .detail-linear .detail-top a:first-of-type {
+      flex: 1; }
+      .detail-linear .detail-top a:first-of-type .iconfont {
+        margin-right: 0.1rem;
+        font-size: 0.36rem;
+        color: #ed424b; }
+    .detail-linear .detail-top h2 {
+      margin: 0 0.4rem;
+      font-size: 0.36rem;
+      line-height: 1rem;
+      color: #ed424b; }
+  .detail-linear .detail-con {
+    display: flex;
+    margin-top: 1rem;
+    padding: 0.3rem 0 0.36rem; }
+    .detail-linear .detail-con .detail-img {
+      width: 2rem;
+      margin-right: 0.5rem; }
+      .detail-linear .detail-con .detail-img img {
+        width: 100%; }
+    .detail-linear .detail-con .detail-main {
+      flex: 1; }
+      .detail-linear .detail-con .detail-main h3 {
+        font-size: 0.36rem;
+        line-height: 1.5;
+        overflow: hidden;
+        -ms-text-overflow: ellipsis;
+        text-overflow: ellipsis;
+        white-space: nowrap; }
+      .detail-linear .detail-con .detail-main p {
+        font-size: 0.28rem;
+        line-height: 1.8;
+        overflow: hidden;
+        -ms-text-overflow: ellipsis;
+        text-overflow: ellipsis;
+        white-space: nowrap; }
+  .detail-linear .read-btn {
+    display: flex; }
+    .detail-linear .read-btn > div {
+      flex: 1;
+      padding-bottom: 0.4rem;
+      border-bottom: 1px solid #ddd; }
+      .detail-linear .read-btn > div:first-child {
+        margin-right: 0.3rem; }
+      .detail-linear .read-btn > div button {
+        display: block;
+        margin: 0 auto;
+        width: 100%;
+        height: 0.66rem;
+        line-height: 0.66rem;
+        font-size: 0.3rem;
+        vertical-align: middle;
+        border: none;
+        border-radius: 0.06rem; }
+      .detail-linear .read-btn > div:first-of-type button {
+        background-color: #ed424b; }
+        .detail-linear .read-btn > div:first-of-type button a {
+          color: #fff; }
+      .detail-linear .read-btn > div:nth-child(2) button {
+        color: #333;
+        background-color: #fff;
+        border: 1px solid #ddd; }
+
+.home-btn {
+  padding: 0px 0.3rem;
+  display: flex;
+  justify-content: center;
+  align-items: center; }
+  .home-btn .iconfont {
+    font-size: 0.44rem;
+    color: #ed424b; }
+
+.detail-intro {
+  padding: 0.4rem 0;
+  font-size: 0.32rem;
+  text-indent: 2em;
+  line-height: 1.6;
+  border-bottom: 1px solid #ddd; }
+  .detail-intro p.show5 {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    line-clamp: 5;
+    -webkit-line-clamp: 5;
+    -webkit-box-orient: vertical; }
+
+.detail-tag {
+  padding: 0.4rem 0;
+  border-bottom: 1px solid #ddd; }
+  .detail-tag h3 {
+    font-size: 0.32rem;
+    margin-bottom: 0.2rem; }
+  .detail-tag ul li {
+    float: left;
+    padding: 0.06rem 0.2rem;
+    margin-right: 0.2rem;
+    color: #333;
+    border: 1px solid #ccc;
+    border-radius: 0.1rem;
+    font-size: 0.28rem; }
+
+.detail-like {
+  padding: 0.4rem 0; }
+  .detail-like h3 {
+    font-size: 0.32rem;
+    margin-bottom: 0.4rem; }
+  .detail-like .like-list {
+    display: flex; }
+    .detail-like .like-list li {
+      flex: 1;
+      margin-right: 0.1rem; }
+
+.similar {
+  height: 3.3rem; }
+  .similar .similar-img {
+    height: 2.8rem; }
+  .similar img {
+    width: 100%;
+    height: 100%; }
+    .similar img[src=""] {
+      opacity: 0; }
+  .similar p {
+    margin-top: 0.1rem;
+    font-size: 0.28rem; }

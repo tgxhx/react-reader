@@ -1,0 +1,46 @@
+$red: #ed424b;
+
+@function pr($px, $base-font-size: 50px) {
+  @if (unitless($px)) {
+    //@warn "Assuming #{$px} to be in pixels, attempting to convert it into pixels for you";
+    @return pr($px + 0px); // That may fail.
+  } @else if (unit($px) == rem) {
+    @return $px;
+  }
+  @return ($px / $base-font-size) * 1rem;
+}
+
+@mixin ell() {
+  overflow: hidden;
+  -ms-text-overflow: ellipsis;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+@mixin wh($w,$h) {
+  width:$w;
+  height:$h;
+}
+
+@mixin ava($w) {
+  width:$w;
+  height:$w;
+  img {
+    width:100%;
+    height:100%;
+  }
+}
+
+@mixin dfcc() {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@mixin overhide($n) {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: $n;
+  -webkit-box-orient: vertical;
+}

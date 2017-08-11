@@ -1,0 +1,15 @@
+* {
+  color:#333;
+}
+
+a {
+  text-decoration: none;
+}
+
+.clearfix:after,.clearfix:before {
+  display: table;
+  content: '';
+}
+.clearfix:after {
+  clear: both;
+}

@@ -1,0 +1,34 @@
+{
+  "name": "abcd",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "classnames": "^2.2.5",
+    "express": "^4.15.4",
+    "morgan": "^1.8.2",
+    "node-sass-chokidar": "0.0.3",
+    "normalize.css": "^7.0.0",
+    "npm-run-all": "^4.0.2",
+    "prop-types": "^15.5.10",
+    "react": "^15.6.1",
+    "react-dom": "^15.6.1",
+    "react-id-swiper": "^1.4.0",
+    "react-redux": "^5.0.5",
+    "react-router": "^2.8.1",
+    "react-router-dom": "^4.1.2",
+    "react-scripts": "1.0.10",
+    "react-slick": "^0.14.11",
+    "redux": "^3.7.2",
+    "redux-thunk": "^2.2.0",
+    "reset-css": "^2.2.1"
+  },
+  "scripts": {
+    "build-css": "node-sass-chokidar src/ -o src/",
+    "watch-css": "npm run build-css && node-sass-chokidar src/ -o src/ --watch --recursive",
+    "start-js": "react-scripts start",
+    "start": "npm-run-all -p watch-css start-js",
+    "build": "npm run build-css && react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject"
+  }
+}

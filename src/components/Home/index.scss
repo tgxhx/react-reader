@@ -1,0 +1,227 @@
+@import "../../assets/css/util.scss";
+
+.home {
+  @at-root .home-header {
+    display: flex;
+    align-items: center;
+    justify-content:space-between;
+    height:pr(45);
+    font-size:pr(25);
+    padding:0 pr(20);
+    img {
+      width:pr(90);
+    }
+    .iconfont {
+      font-size: pr(26);
+      color: $red;
+    }
+  }
+
+  .slick-initialized.slick-slider {
+    overflow: hidden;
+  }
+  .slick-list {
+    img {
+      width:100%;
+    }
+  }
+  .slick-dots li {
+    margin:0 2px;
+  }
+  .slick-dots li.slick-active button:before {
+    opacity:1;
+    color:$red;
+  }
+  .slick-dots li button:before {
+    font-size:pr(35);
+    font-family: Arial;
+    opacity: 1;
+    color:#ddd;
+  }
+  .slick-dots {
+    bottom:0;
+  }
+  .title {
+    h3 {
+      text-indent: pr(10);
+      border-left:3px solid $red;
+      font-size:pr(16);
+    }
+  }
+
+  .home-nav {
+    display: flex;
+    padding: 10px 0;
+    margin: 10px 0;
+    background-color: #fff;
+
+  }
+  .guide-nav-div {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    > i {
+      width: 24px;
+      height: 24px;
+      background-image: url(../../assets/images/sprite.0.50.png);
+    }
+    &:nth-of-type(1) {
+      i {
+        background-position: -63px -28px;
+      }
+    }
+    &:nth-of-type(2) {
+      i {
+        background-position: 0 0;
+      }
+    }
+    &:nth-of-type(3) {
+      i {
+        background-position: 0 -30px;
+      }
+    }
+    &:nth-of-type(4) {
+      i {
+        background-position: 0 -60px;
+      }
+    }
+    &:nth-of-type(5) {
+      i {
+        background-position: -30px -30px;
+      }
+    }
+
+    h4 {
+      font-size:14px;
+      margin:10px 0;
+      color:#333;
+    }
+  }
+
+ @at-root .recommend {
+   padding: pr(15) 0;
+   margin-bottom: pr(15);
+   background-color: #fff;
+   .title {
+     margin-left: pr(15);
+     margin-bottom: pr(10);
+     border-left: 2px solid #ed424b;
+     text-indent: pr(5);
+     font-size: pr(16);
+     line-height: pr(16);
+   }
+   .list {
+     .list-ul {
+       position: relative;
+       overflow-x: auto;
+       overflow-y: hidden;
+       white-space: nowrap;
+       text-indent: pr(7);
+       .list-li {
+         display: inline-block;
+         margin-right: pr(8);
+         width: pr(100);
+         white-space: normal;
+         img {
+           width: 100%;
+           height:pr(125);
+         }
+         p {
+           font-size:pr(14);
+           overflow: hidden;
+           text-overflow: ellipsis;
+           white-space: nowrap;
+           line-height:1.2;
+         }
+       }
+     }
+   }
+ }
+
+  @at-root .book-list {
+    margin-top: pr(15);
+    padding: pr(15);
+    background-color: #fff;
+    .title {
+      margin-left: 0px;
+      margin-bottom: pr(10);
+      border-left: 2px solid #ed424b;
+      text-indent: pr(5);
+      font-size: pr(16);
+      line-height: pr(16);
+    }
+    ul li {
+      display: flex;
+      padding-bottom: pr(10);
+      margin-bottom: pr(14);
+      border-bottom: 1px solid #ddd;
+      &:last-of-type {
+        border-bottom: none;
+      }
+      a {
+        display: flex;
+      }
+      .book-image {
+        width: pr(80);
+        img {
+          width: 100%;
+        }
+      }
+      .book-detail {
+        position: relative;
+        flex: 1;
+        padding: 0;
+        margin-left: pr(20);
+        h3 {
+          font-size: pr(18);
+          margin-bottom: pr(10);
+        }
+        p {
+          line-height:1.5em;
+          max-height:2.8em;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          display: -webkit-box;
+          line-clamp: 2;
+          font-size: pr(14);
+          color: #969ba3;
+          -webkit-box-orient: vertical;
+          -webkit-line-clamp: 2;
+          -webkit-box-orient: vertical;
+          -webkit-box-orient:vertical;
+        }
+        .author {
+          position: absolute;
+          left: 0px;
+          bottom: pr(5);
+          color: #969ba3;
+          font-size: pr(13);
+          > * {
+            color: #969ba3;
+          }
+        }
+        .category-r {
+          position: absolute;
+          right: 0;
+          bottom: pr(5);
+          float: right;
+          color: #969ba3;
+          font-size: pr(10);
+          span {
+            border: 1px solid #ccc;
+            border-radius: pr(2);
+            padding: 0 pr(2);
+          }
+          span:nth-child(2) {
+            color: #ed424b;
+          }
+          span:nth-child(3) {
+            color: #4284ed;
+          }
+        }
+      }
+    }
+  }
+}

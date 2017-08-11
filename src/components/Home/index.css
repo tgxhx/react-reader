@@ -1,0 +1,171 @@
+.home-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 0.9rem;
+  font-size: 0.5rem;
+  padding: 0 0.4rem; }
+  .home-header img {
+    width: 1.8rem; }
+  .home-header .iconfont {
+    font-size: 0.52rem;
+    color: #ed424b; }
+
+.home .slick-initialized.slick-slider {
+  overflow: hidden; }
+
+.home .slick-list img {
+  width: 100%; }
+
+.home .slick-dots li {
+  margin: 0 2px; }
+
+.home .slick-dots li.slick-active button:before {
+  opacity: 1;
+  color: #ed424b; }
+
+.home .slick-dots li button:before {
+  font-size: 0.7rem;
+  font-family: Arial;
+  opacity: 1;
+  color: #ddd; }
+
+.home .slick-dots {
+  bottom: 0; }
+
+.home .title h3 {
+  text-indent: 0.2rem;
+  border-left: 3px solid #ed424b;
+  font-size: 0.32rem; }
+
+.home .home-nav {
+  display: flex;
+  padding: 10px 0;
+  margin: 10px 0;
+  background-color: #fff; }
+
+.home .guide-nav-div {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center; }
+  .home .guide-nav-div > i {
+    width: 24px;
+    height: 24px;
+    background-image: url(../../assets/images/sprite.0.50.png); }
+  .home .guide-nav-div:nth-of-type(1) i {
+    background-position: -63px -28px; }
+  .home .guide-nav-div:nth-of-type(2) i {
+    background-position: 0 0; }
+  .home .guide-nav-div:nth-of-type(3) i {
+    background-position: 0 -30px; }
+  .home .guide-nav-div:nth-of-type(4) i {
+    background-position: 0 -60px; }
+  .home .guide-nav-div:nth-of-type(5) i {
+    background-position: -30px -30px; }
+  .home .guide-nav-div h4 {
+    font-size: 14px;
+    margin: 10px 0;
+    color: #333; }
+
+.recommend {
+  padding: 0.3rem 0;
+  margin-bottom: 0.3rem;
+  background-color: #fff; }
+  .recommend .title {
+    margin-left: 0.3rem;
+    margin-bottom: 0.2rem;
+    border-left: 2px solid #ed424b;
+    text-indent: 0.1rem;
+    font-size: 0.32rem;
+    line-height: 0.32rem; }
+  .recommend .list .list-ul {
+    position: relative;
+    overflow-x: auto;
+    overflow-y: hidden;
+    white-space: nowrap;
+    text-indent: 0.14rem; }
+    .recommend .list .list-ul .list-li {
+      display: inline-block;
+      margin-right: 0.16rem;
+      width: 2rem;
+      white-space: normal; }
+      .recommend .list .list-ul .list-li img {
+        width: 100%;
+        height: 2.5rem; }
+      .recommend .list .list-ul .list-li p {
+        font-size: 0.28rem;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        line-height: 1.2; }
+
+.book-list {
+  margin-top: 0.3rem;
+  padding: 0.3rem;
+  background-color: #fff; }
+  .book-list .title {
+    margin-left: 0px;
+    margin-bottom: 0.2rem;
+    border-left: 2px solid #ed424b;
+    text-indent: 0.1rem;
+    font-size: 0.32rem;
+    line-height: 0.32rem; }
+  .book-list ul li {
+    display: flex;
+    padding-bottom: 0.2rem;
+    margin-bottom: 0.28rem;
+    border-bottom: 1px solid #ddd; }
+    .book-list ul li:last-of-type {
+      border-bottom: none; }
+    .book-list ul li a {
+      display: flex; }
+    .book-list ul li .book-image {
+      width: 1.6rem; }
+      .book-list ul li .book-image img {
+        width: 100%; }
+    .book-list ul li .book-detail {
+      position: relative;
+      flex: 1;
+      padding: 0;
+      margin-left: 0.4rem; }
+      .book-list ul li .book-detail h3 {
+        font-size: 0.36rem;
+        margin-bottom: 0.2rem; }
+      .book-list ul li .book-detail p {
+        line-height: 1.5em;
+        max-height: 2.8em;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        display: -webkit-box;
+        line-clamp: 2;
+        font-size: 0.28rem;
+        color: #969ba3;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        -webkit-box-orient: vertical; }
+      .book-list ul li .book-detail .author {
+        position: absolute;
+        left: 0px;
+        bottom: 0.1rem;
+        color: #969ba3;
+        font-size: 0.26rem; }
+        .book-list ul li .book-detail .author > * {
+          color: #969ba3; }
+      .book-list ul li .book-detail .category-r {
+        position: absolute;
+        right: 0;
+        bottom: 0.1rem;
+        float: right;
+        color: #969ba3;
+        font-size: 0.2rem; }
+        .book-list ul li .book-detail .category-r span {
+          border: 1px solid #ccc;
+          border-radius: 0.04rem;
+          padding: 0 0.04rem; }
+        .book-list ul li .book-detail .category-r span:nth-child(2) {
+          color: #ed424b; }
+        .book-list ul li .book-detail .category-r span:nth-child(3) {
+          color: #4284ed; }
