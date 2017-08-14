@@ -1,25 +1,31 @@
 import React, {Component} from 'react'
-import {connect} from 'react-redux'
-import {bindActionCreators} from 'redux'
-import * as actions from '../../actions/people-actions'
+import PropTypes from 'prop-types'
 
 class BottomNav extends Component {
 
+  static propTypes = {
+    font_panel: PropTypes.bool.isRequired,
+    bg_night: PropTypes.bool.isRequired,
+    showFontPanel: PropTypes.func.isRequired,
+    switchNight: PropTypes.func.isRequired,
+    showListPanel: PropTypes.func.isRequired
+  }
+
   //切换字体面板
   showFontPanel() {
-    this.props.actions.showFontPanel(!this.props.font_panel)
+    this.props.showFontPanel(!this.props.font_panel)
   }
 
   //切换夜间模式
   switchNight() {
-    this.props.actions.switchNight(!this.props.bg_night)
+    this.props.switchNight(!this.props.bg_night)
   }
 
   //打开目录列表
   showListPanel() {
-    this.props.actions.showListPanel(true)
+    this.props.showListPanel(true)
     //同时隐藏字体面板
-    this.props.actions.showFontPanel(false)
+    this.props.showFontPanel(false)
   }
 
   render() {
@@ -40,7 +46,7 @@ class BottomNav extends Component {
         <div className="item" id="night-button" onClick={this.switchNight.bind(this)}>
           {this.props.bg_night ?
             <span className="icon-text">
-            <i className="iconfont icon-menu"></i>
+            <i className="iconfont icon-day"></i>
               白天
             </span>
             :
@@ -55,15 +61,4 @@ class BottomNav extends Component {
   }
 }
 
-const mapStateToProps = (state) => ({
-  font_panel: state.font_panel,
-  bg_night: state.bg_night
-})
-
-const mapDispatchToProps = (dispatch) => {
-  return {
-    actions: bindActionCreators(actions, dispatch)
-  }
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(BottomNav)
+export default BottomNav

@@ -129,7 +129,7 @@ class BookDetail extends Component {
               <ul className="like-list">
                 {likes.map((item, idx) =>
                   <li key={idx}>
-                    <Similar like={item}/>
+                    <Similar like={item} api={this.props.api}/>
                   </li>
                 )}
                 {/*<li v-for="(item,index) in likes">

@@ -1,8 +1,5 @@
 import React, {Component} from 'react'
 import PropTypes from 'prop-types'
-import {connect} from 'react-redux'
-import {bindActionCreators} from 'redux'
-import * as actions from '../../actions/people-actions'
 
 class ListPanel extends Component {
   constructor(props) {
@@ -16,7 +13,12 @@ class ListPanel extends Component {
   static propTypes = {
     bookId: PropTypes.string.isRequired,
     hideBar: PropTypes.func.isRequired,
-    saveBooksInfo: PropTypes.func.isRequired
+    saveBooksInfo: PropTypes.func.isRequired,
+    api: PropTypes.string.isRequired,
+    list_panel: PropTypes.bool.isRequired,
+    curChapter:PropTypes.number,
+    curChapterAction: PropTypes.func,
+    showListPanel: PropTypes.func
   }
 
   componentDidMount() {
@@ -38,15 +40,15 @@ class ListPanel extends Component {
   }
 
   hideListPanel = () => {
-    this.props.actions.showListPanel(false)
+    this.props.showListPanel(false)
   }
 
   //跳转到指定章节
   redirectTo (index) {
-    index = Math.min(index, 50)
-    this.props.actions.curChapter(index)
     this.hideListPanel()
     this.props.hideBar(false)  //点击隐藏上下面板，调用父元素的方法
+    index = Math.min(index, 50)
+    this.props.curChapterAction(index)
     setTimeout(() => {
       document.body.scrollTop = 0
       this.props.saveBooksInfo()  //点击保存阅读进度，调用父元素的方法
@@ -64,7 +66,12 @@ class ListPanel extends Component {
           <div className="list-content">
             <ul>
               {this.state.chapterList.map((item, idx) =>
-                <li key={idx} onClick={this.redirectTo.bind(this, idx + 1)} style={this.props.curChapter === idx + 1 ? {color: '#ed424b'}: {}}>· {idx+1}. {item}</li>
+                <li
+                  key={idx}
+                  onClick={this.redirectTo.bind(this, idx + 1)}
+                  style={this.props.curChapter === idx + 1 ? {color: '#ed424b'}: {}}>
+                  · {idx+1}. {item}
+                  </li>
               )}
             </ul>
           </div>
@@ -74,16 +81,4 @@ class ListPanel extends Component {
   }
 }
 
-const mapStateToProps = (state) => ({
-  api: state.api,
-  list_panel: state.list_panel,
-  curChapter: state.curChapter
-})
-
-const mapDispatchToProps = (dispatch) => {
-  return {
-    actions: bindActionCreators(actions, dispatch)
-  }
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(ListPanel)
+export default ListPanel

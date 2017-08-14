@@ -22,7 +22,8 @@ class Reader extends Component {
       title: '',
       content: [],
       bar: false,
-      booksReadInfo: {}
+      booksReadInfo: {},
+      firstUpdate: false
     }
   }
 
@@ -45,8 +46,12 @@ class Reader extends Component {
       this.setState({
         booksReadInfo: localEvent.StorageGetter('bookreaderinfo')
       }, () => {
-        this.getData(id, this.state.booksReadInfo[id].chapter)
-        this.props.actions.curChapter(this.state.booksReadInfo[id].chapter)
+        const chapter = this.state.booksReadInfo[id].chapter
+        this.getData(id, chapter)
+        this.props.actions.curChapter(chapter)
+        this.setState({
+          firstUpdate: true
+        })
       })
     } else {
       //当前书籍没有读过但是localStorage保存了其他书籍进度
@@ -80,7 +85,7 @@ class Reader extends Component {
     if (nextProps.fz_size !== this.props.fz_size) {
       localEvent.StorageSetter('fz_size', nextProps.fz_size)
     }
-    if (nextProps.curChapter !== this.props.curChapter) {
+    if (nextProps.curChapter !== this.props.curChapter && this.state.firstUpdate) {
       this.getData(this.props.params.id, nextProps.curChapter)
     }
   }
@@ -112,6 +117,7 @@ class Reader extends Component {
     let target = document.body.scrollTop + window.screen.height - 80
     this.startScroll(target, 20)
   }
+
   //滚动
   startScroll(target, speed) {
     let times = null
@@ -177,7 +183,7 @@ class Reader extends Component {
 
   render() {
     const {loading, title, bar, content} = this.state
-    const {fz_size, bg_color, font_panel,list_panel, bg_night, params, actions} = this.props
+    const {fz_size, bg_color, font_panel, list_panel, bg_night, params, actions} = this.props
     return (
       <div id="reader">
         {loading && <Loading className="loading"/>}
@@ -190,23 +196,28 @@ class Reader extends Component {
           style={{fontSize: `${fz_size}px`}}>
           <h4>{title}</h4>
           {!loading &&
-            <div className="chapterContent">
-              {content.map((item, idx) =>
-                <p key={idx}>{item}</p>
-              )}
-            </div>}
+          <div className="chapterContent">
+            {content.map((item, idx) =>
+              <p key={idx}>{item}</p>
+            )}
+          </div>}
           {!loading &&
-            <div className="btn-bar">
-              <ul className="btn-tab">
-                <li className="prev-btn" onClick={this.prevChapter}>上一章</li>
-                <li className="next-btn" onClick={this.nextChapter}>下一章</li>
-              </ul>
-            </div>}
+          <div className="btn-bar">
+            <ul className="btn-tab">
+              <li className="prev-btn" onClick={this.prevChapter}>上一章</li>
+              <li className="next-btn" onClick={this.nextChapter}>下一章</li>
+            </ul>
+          </div>}
         </div>
         <div className="page-up" onClick={this.pageUp}></div>
         <div className="click-mask" onClick={this.toggleBar.bind(this, !this.state.bar)}></div>
         <div className="page-down" onClick={this.pageDown}></div>
-        {bar && <BottomNav/>}
+        {bar && <BottomNav
+          font_panel={font_panel}
+          bg_night={bg_night}
+          showFontPanel={actions.showFontPanel}
+          switchNight={actions.switchNight}
+          showListPanel={actions.showListPanel}/>}
         {font_panel && <div className="top-nav-pannel-bk font-container"></div>}
         {font_panel && <FontNav/>}
         <Cover
@@ -218,7 +229,9 @@ class Reader extends Component {
           saveBooksInfo={this.saveBooksInfo}
           api={this.props.api}
           list_panel={list_panel}
-          curChapter={this.props.curChapter}/>
+          curChapter={this.props.curChapter}
+          curChapterAction={actions.curChapter}
+          showListPanel={actions.showListPanel}/>
       </div>
     )
   }

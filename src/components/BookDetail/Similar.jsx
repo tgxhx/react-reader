@@ -1,5 +1,4 @@
 import React, {Component} from 'react'
-import {connect} from 'react-redux'
 import PropTypes from 'prop-types'
 // import {hashHistory} from 'react-router'
 import imgError from '../../assets/js/imgError'
@@ -13,7 +12,8 @@ class Similar extends Component {
   }
 
   static propTypes = {
-    like: PropTypes.string.isRequired
+    like: PropTypes.string.isRequired,
+    api: PropTypes.string.isRequired
   }
 
   static contextTypes = {
@@ -52,8 +52,5 @@ class Similar extends Component {
   }
 }
 
-const mapStateToProps = (state) => ({
-  api: state.api
-})
 
-export default connect(mapStateToProps)(Similar)
+export default Similar
