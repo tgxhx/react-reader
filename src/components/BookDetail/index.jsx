@@ -2,6 +2,7 @@ import React, {Component} from 'react'
 import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
 import {Link} from 'react-router'
+import localEvent from '../../assets/js/local'
 
 import Similar from './Similar'
 import imgError from '../../assets/js/imgError'
@@ -18,7 +19,8 @@ class BookDetail extends Component {
       loading: false,
       bookDetail: {},
       likes: [],  //相似推荐
-      showmore: false //简介显示更多
+      showmore: false, //简介显示更多,
+      hasRead: false
     }
   }
 
@@ -27,12 +29,16 @@ class BookDetail extends Component {
   }
 
   componentDidMount() {
-    this.getBookDetail(this.props.params.id)
+    const id = this.props.params.id
+    this.getBookDetail(id)
+    this.setHasRead(id)
   }
 
   componentWillUpdate(nextProps) {
-    if (nextProps.params.id !== this.props.params.id) {
-      this.getBookDetail(nextProps.params.id)
+    const pid = nextProps.params.id
+    if (pid !== this.props.params.id) {
+      this.getBookDetail(pid)
+      this.setHasRead(pid)
     }
   }
 
@@ -51,6 +57,19 @@ class BookDetail extends Component {
       })
   }
 
+  setHasRead(id) {
+    this.setState({
+      hasRead: false
+    }, () => {
+      const info = localEvent.StorageGetter('bookreaderinfo')
+      if (info[id]) {
+        this.setState({
+          hasRead: true
+        })
+      }
+    })
+  }
+
   goBack = () => {
     this.context.router.goBack()
   }
@@ -66,7 +85,7 @@ class BookDetail extends Component {
   }
 
   render() {
-    const {bookDetail, showmore, loading, likes} = this.state
+    const {bookDetail, showmore, loading, likes, hasRead} = this.state
     const id = this.props.params.id
     const style5 = {'WebkitBoxOrient': 'vertical'}
     return (
@@ -96,7 +115,7 @@ class BookDetail extends Component {
             <div className="read-btn">
               <div>
                 <button>
-                  <Link to={`/reader/${id}`}>开始阅读</Link>
+                  <Link to={`/reader/${id}`}>{hasRead ? '继续阅读': '开始阅读'}</Link>
                 </button>
               </div>
               <div>
