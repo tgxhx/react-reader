@@ -15,10 +15,17 @@ class BottomNav extends Component {
     this.props.actions.switchNight(!this.props.bg_night)
   }
 
+  //打开目录列表
+  showListPanel() {
+    this.props.actions.showListPanel(true)
+    //同时隐藏字体面板
+    this.props.actions.showFontPanel(false)
+  }
+
   render() {
     return (
       <div className="bottom-nav">
-        <div className="item menu-button" id="menu_button">
+        <div className="item menu-button" onClick={this.showListPanel.bind(this)}>
           <span className="icon-text">
             <i className="iconfont icon-menu"></i>
             目录

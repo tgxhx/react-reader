@@ -13,3 +13,7 @@ a {
 .clearfix:after {
   clear: both;
 }
+
+html,body,#root,.App {
+  height:100%;
+}

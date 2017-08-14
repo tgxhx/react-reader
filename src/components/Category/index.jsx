@@ -1,4 +1,5 @@
 import React, {Component} from 'react'
+import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
 import {Link} from 'react-router'
 import Loading from '../Loading'
@@ -14,6 +15,10 @@ class Category extends Component {
       categoryList: [],
       loading: false
     }
+  }
+
+  static contextTypes = {
+    router: PropTypes.object
   }
 
   componentDidMount() {
@@ -52,18 +57,22 @@ class Category extends Component {
     }
   }
 
+  goBack = () => {
+    this.context.router.goBack()
+  }
+
   render() {
+    const {loading} = this.state
     return (
       <div className="category">
-        {this.state.loading ? <Loading className="loading"/> : null}
-        {!this.state.loading ?
+        {loading && <Loading className="loading"/>}
+        {!loading &&
           <div className="category-header">
-            <Link to="/">
+            <a onClick={this.goBack}>
               <h2><i className="iconfont icon-fanhui"></i>{this.title()}</h2>
-            </Link>
-          </div>
-          : null}
-        {!this.state.loading ?
+            </a>
+          </div>}
+        {!loading &&
           < div className="category-list">
             < ul>
               {this.state.categoryList.map((item, idx) =>
@@ -89,8 +98,7 @@ class Category extends Component {
                 </li>
               )}
             </ul>
-          </div>
-          : null}
+          </div>}
       </div>
     )
   }

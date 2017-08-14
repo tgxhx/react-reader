@@ -1,6 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import Title from './Title'
+import {Link} from 'react-router'
 
 const Recommend = (props) =>
   <div className="book-list">
@@ -8,7 +9,7 @@ const Recommend = (props) =>
     <ul>
       {props.booklist.map((item, idx) =>
         <li key={idx}>
-          <a href="/">
+          <Link to={`/bookdetail/${item.id}`}>
             <div className="book-image">
               <img src={item.images} alt=""/>
             </div>
@@ -25,7 +26,7 @@ const Recommend = (props) =>
                 <span>{item.wordcount}万字</span>
               </div>
             </div>
-          </a>
+          </Link>
         </li>
       )}
     </ul>

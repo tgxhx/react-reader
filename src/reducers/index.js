@@ -68,6 +68,15 @@ const bg_night = (state = initState.bg_night, action) => {
   }
 }
 
+//目录
+const list_panel = (state = initState.list_panel, action) => {
+  switch (action.type) {
+    case types.SHOW_LIST_PANEL:
+      return action.state
+    default:
+      return state
+  }
+}
 
 const rootReducer = combineReducers({
   people,
@@ -77,7 +86,8 @@ const rootReducer = combineReducers({
   curChapter,
   bg_color,
   font_panel,
-  bg_night
+  bg_night,
+  list_panel
 })
 
 export default rootReducer

@@ -10,7 +10,7 @@ const Recommend = (props) =>
       <ul className="list-ul">
         {props.booklist.map((item, idx) =>
           <li key={idx} className="list-li">
-            <Link to={`/bookdetail/${item.id}?bar=baz`}>
+            <Link to={`/bookdetail/${item.id}`}>
               <img src={item.images} alt=""/>
               <p className="book-name">{item.name}</p>
               <p className="book-author">{item.author}</p>

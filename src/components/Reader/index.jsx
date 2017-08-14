@@ -1,5 +1,4 @@
 import React, {Component} from 'react'
-// import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
 import {bindActionCreators} from 'redux'
 import * as actions from '../../actions/people-actions'
@@ -9,6 +8,8 @@ import Loading from '../Loading'
 import TopNav from './TopNav'
 import BottomNav from './BottomNav'
 import FontNav from './FontNav'
+import ListPanel from './ListPanel'
+import Cover from './Cover'
 
 import './index.css'
 
@@ -71,8 +72,8 @@ class Reader extends Component {
   }
 
   componentDidMount() {
-    this.getData(this.props.params.id)
-    console.log(this.props)
+    /*this.getData(this.props.params.id)
+    console.log(this.props)*/
   }
 
   componentWillUpdate(nextProps, nextState) {
@@ -100,8 +101,41 @@ class Reader extends Component {
       })
   }
 
+  //向上翻页
+  pageUp = () => {
+    let target = document.body.scrollTop - window.screen.height - 80
+    this.startScroll(target, -20)
+  }
+
+  //向下翻页
+  pageDown = () => {
+    let target = document.body.scrollTop + window.screen.height - 80
+    this.startScroll(target, 20)
+  }
+  //滚动
+  startScroll(target, speed) {
+    let times = null
+    times = setInterval(function () {
+      if (speed > 0) {
+        if (document.body.scrollTop <= target) {
+          document.body.scrollTop += speed
+        }
+        if (document.body.scrollTop > target || document.body.scrollTop + window.screen.height >= document.body.scrollHeight) {
+          clearInterval(times)
+        }
+      } else {
+        if (document.body.scrollTop >= target) {
+          document.body.scrollTop += speed
+        }
+        if (document.body.scrollTop < target || document.body.scrollTop <= 0) {
+          clearInterval(times)
+        }
+      }
+    }, 1)
+  }
+
   //修改章节
-  nextChapter() {
+  nextChapter = () => {
     this.props.actions.nextChapter('', 50)
     setTimeout(() => {
       document.body.scrollTop = 0
@@ -110,7 +144,7 @@ class Reader extends Component {
     }, 300)
   }
 
-  prevChapter() {
+  prevChapter = () => {
     this.props.actions.prevChapter()
     setTimeout(() => {
       document.body.scrollTop = 0
@@ -118,7 +152,7 @@ class Reader extends Component {
     }, 300)
   }
 
-  saveBooksInfo() {
+  saveBooksInfo = () => {
     //可用localStorage保存每本小说阅读进度
     let id = this.props.params.id
     let info = this.state.booksReadInfo
@@ -134,49 +168,57 @@ class Reader extends Component {
   }
 
   //显示隐藏面板
-  toggleBar() {
+  toggleBar = (bool) => {
     this.setState({
-      bar: !this.state.bar
+      bar: bool
     })
     this.props.actions.showFontPanel(false)
   }
 
   render() {
     const {loading, title, bar, content} = this.state
-    const {fz_size, bg_color, font_panel, bg_night} = this.props
+    const {fz_size, bg_color, font_panel,list_panel, bg_night, params, actions} = this.props
     return (
       <div id="reader">
-        {loading ? <Loading className="loading"/> : ''}
-        {bar ? <TopNav/> : ''}
+        {loading && <Loading className="loading"/>}
+        {bar && <TopNav/>}
         <div
           className="read-container"
           data-bg={bg_color}
           data-night={bg_night}
           ref="fz_size"
-          style={{'fontSize': fz_size + 'px'}}>
+          style={{fontSize: `${fz_size}px`}}>
           <h4>{title}</h4>
-          {!loading ?
+          {!loading &&
             <div className="chapterContent">
               {content.map((item, idx) =>
                 <p key={idx}>{item}</p>
               )}
-            </div>
-            : ''}
-          {!loading ?
+            </div>}
+          {!loading &&
             <div className="btn-bar">
               <ul className="btn-tab">
-                <li className="prev-btn" onClick={this.prevChapter.bind(this)}>上一章</li>
-                <li className="next-btn" onClick={this.nextChapter.bind(this)}>下一章</li>
+                <li className="prev-btn" onClick={this.prevChapter}>上一章</li>
+                <li className="next-btn" onClick={this.nextChapter}>下一章</li>
               </ul>
-            </div>
-            : ''}
+            </div>}
         </div>
-        <div className="page-up"></div>
-        <div className="click-mask" onClick={this.toggleBar.bind(this)}></div>
-        <div className="page-down"></div>
-        {bar ? <BottomNav/> : ''}
-        {font_panel ? <div className="top-nav-pannel-bk font-container"></div> : ''}
-        {font_panel ? <FontNav/> : ''}
+        <div className="page-up" onClick={this.pageUp}></div>
+        <div className="click-mask" onClick={this.toggleBar.bind(this, !this.state.bar)}></div>
+        <div className="page-down" onClick={this.pageDown}></div>
+        {bar && <BottomNav/>}
+        {font_panel && <div className="top-nav-pannel-bk font-container"></div>}
+        {font_panel && <FontNav/>}
+        <Cover
+          showListPanel={actions.showListPanel}
+          list_panel={list_panel}/>
+        <ListPanel
+          bookId={params.id}
+          hideBar={this.toggleBar}
+          saveBooksInfo={this.saveBooksInfo}
+          api={this.props.api}
+          list_panel={list_panel}
+          curChapter={this.props.curChapter}/>
       </div>
     )
   }
@@ -188,7 +230,8 @@ const mapStateToProps = (state) => ({
   curChapter: state.curChapter,
   bg_color: state.bg_color,
   font_panel: state.font_panel,
-  bg_night: state.bg_night
+  bg_night: state.bg_night,
+  list_panel: state.list_panel
 })
 
 const mapDispatchToProps = (dispatch) => {

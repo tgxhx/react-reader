@@ -14,16 +14,16 @@ class FontNav extends Component {
   }
 
   //改变字体
-  addFz() {
+  addFz = () => {
     this.props.actions.fzSizeAdd()
   }
 
-  subFz() {
+  subFz = () => {
     this.props.actions.fzSizeSub()
   }
 
   //更换背景
-  changeColor(index) {
+  changeColor = (index) => {
     this.setState({
       now_color: index
     })
@@ -35,20 +35,20 @@ class FontNav extends Component {
   render() {
     const items = []
     for (var i = 0; i < 6; i++) {
-        items.push(<div
-          className={`bk-container ${i === this.state.now_color ? 'bk-container-current' : ''}`}
-          key={i}>
-          <div className="color_btn" onClick={this.changeColor.bind(this, i)}></div>
-        </div>)
+      items.push(<div
+        className={`bk-container ${i === this.state.now_color ? 'bk-container-current' : ''}`}
+        key={i}>
+        <div className="color_btn" onClick={this.changeColor.bind(this, i)}></div>
+      </div>)
     }
     return (
       <div className="top-nav-pannel font-container" id="font-container">
         <div className="child-mod">
           <span>字号</span>
-          <button id="large-font" className="spe-button" onClick={this.addFz.bind(this)}>
+          <button id="large-font" className="spe-button" onClick={this.addFz}>
             大
           </button>
-          <button id="small-font" className="spe-button" onClick={this.subFz.bind(this)}>
+          <button id="small-font" className="spe-button" onClick={this.subFz}>
             小
           </button>
         </div>
