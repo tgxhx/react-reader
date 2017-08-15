@@ -20,7 +20,9 @@ class BookDetail extends Component {
       bookDetail: {},
       likes: [],  //相似推荐
       showmore: false, //简介显示更多,
-      hasRead: false
+      hasRead: false,
+      shelf: [], //书架列表
+      addShelf: false
     }
   }
 
@@ -32,6 +34,15 @@ class BookDetail extends Component {
     const id = this.props.params.id
     this.getBookDetail(id)
     this.setHasRead(id)
+    if (localEvent.StorageGetter('bookShelf')) {
+      this.setState({
+        shelf: localEvent.StorageGetter('bookShelf')
+      }, () => {
+        if (this.state.shelf.find(el => el.id == id)) {
+          this.setState({addShelf: true})
+        }
+      })
+    }
   }
 
   componentWillUpdate(nextProps) {
@@ -84,8 +95,26 @@ class BookDetail extends Component {
     }))
   }
 
+  //加入书架
+  addToShelf = () => {
+    const detail = this.state.bookDetail
+    if (this.state.shelf.find(el => el.id === detail.id)) {
+      return
+    }
+    const bookInfo = {
+      id: detail.id,
+      name: detail.name,
+      author: detail.author,
+      images: detail.images,
+      recent: 1
+    }
+    this.state.shelf.push(bookInfo)
+    localEvent.StorageSetter('bookShelf', this.state.shelf)
+    this.setState({addShelf: true})
+  }
+
   render() {
-    const {bookDetail, showmore, loading, likes, hasRead} = this.state
+    const {bookDetail, showmore, loading, likes, hasRead, addShelf} = this.state
     const id = this.props.params.id
     const style5 = {'WebkitBoxOrient': 'vertical'}
     return (
@@ -115,12 +144,12 @@ class BookDetail extends Component {
             <div className="read-btn">
               <div>
                 <button>
-                  <Link to={`/reader/${id}`}>{hasRead ? '继续阅读': '开始阅读'}</Link>
+                  <Link to={`/reader/${id}`}>{hasRead ? '继续阅读' : '开始阅读'}</Link>
                 </button>
               </div>
               <div>
-                <button>
-                  <Link to={`/reader/${id}`}>开始阅读</Link>
+                <button className={addShelf ? 'added': ''}>
+                  <a onClick={this.addToShelf}>{addShelf ? '已在书架': '加入书架'}</a>
                 </button>
               </div>
             </div>

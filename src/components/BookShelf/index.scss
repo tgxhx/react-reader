@@ -1,0 +1,123 @@
+@import "../../assets/css/util.scss";
+
+.shelf {
+  header {
+    left:0;
+    top: 0;
+    right: 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 pr(15);
+    height: pr(50);
+    background-color: #fff;
+    @include border-1px(bottom);
+    position: fixed;
+    > .iconfont {
+      color: $red;
+    }
+  }
+  span {
+    font-size: pr(14);
+  }
+  .shelf-content {
+    padding-top:pr(50);
+  }
+  @at-root .shelf-item {
+    display: flex;
+    padding: pr(16);
+    @include border-1px(bottom);
+    &:hover {
+      background-color: #f0f0f0;
+    }
+    .edit {
+      width:pr(30);
+      .edit-btn {
+        display: none;
+        &:checked + .checkbox {
+          &::after {
+            background-color: $red;
+            border-radius: 100%;
+            content: "";
+            display: inline-block;
+            height: 12px;
+            margin: 2px;
+            width: 12px;
+          }
+        }
+      }
+      .checkbox {
+        background-color: #fff;
+        border: 1px solid rgba(0,0,0,0.15);
+        display: inline-block;
+        border-radius: 50%;
+        height: 16px;
+        margin-right: 10px;
+        width: 16px;
+      }
+    }
+    > img {
+      margin-right:pr(15);
+      width: pr(60);
+      height: pr(75);
+    }
+
+    @at-root .shelf-detail {
+      display: flex;
+      flex-direction: column;
+      justify-content:space-between;
+      flex:1;
+      padding: pr(3) 0;
+      p {
+        font-size:pr(14);
+        color:#aaa;
+        &.title {
+          display: flex;
+          justify-content:space-between;
+          span:first-child {
+            font-size:pr(16);
+            color:#333;
+          }
+        }
+        > * {
+          color:#aaa;
+          font-size:pr(14);
+          .iconfont {
+            color:#aaa;
+            &:before {
+              display: inline-block;
+              transform: rotate(-180deg);
+            }
+          }
+        }
+      }
+    }
+  }
+  footer {
+    @include border-1px(top);
+    position: fixed;
+    left:0;
+    bottom:0;
+    right:0;
+    display: flex;
+    align-items: center;
+    justify-content:flex-end;
+    height:pr(40);
+    .delete {
+      width:50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size:pr(14);
+      color: $red;
+    }
+    .iconfont {
+      margin-top:pr(4);
+      margin-right:pr(2);
+      font-size:pr(18);
+      color: $red;
+    }
+  }
+}
+
+

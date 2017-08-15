@@ -79,6 +79,11 @@
         vertical-align: middle;
         border: none;
         border-radius: 0.06rem; }
+        .detail-linear .read-btn > div button:focus {
+          outline: none; }
+        .detail-linear .read-btn > div button.added {
+          background-color: #f3f3f3 !important;
+          cursor: not-allowed; }
       .detail-linear .read-btn > div:first-of-type button {
         background-color: #ed424b; }
         .detail-linear .read-btn > div:first-of-type button a {

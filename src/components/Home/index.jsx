@@ -66,7 +66,7 @@ class Home extends Component {
         <div>
           <div className="home-header">
             <img src="http://qidian.gtimg.com/qdm/img/logo-qdm.0.50.svg" alt=""/>
-            <i className="iconfont icon-yonghu"></i>
+            <i className="iconfont icon-bookshelf"></i>
           </div>
           <Swiper/>
           <nav className="home-nav">

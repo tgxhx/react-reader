@@ -88,6 +88,13 @@
         vertical-align: middle;
         border: none;
         border-radius: pr(3);
+        &:focus {
+          outline:none;
+        }
+        &.added {
+          background-color: #f3f3f3 !important;
+          cursor: not-allowed;
+        }
       }
       &:first-of-type {
         button {
