@@ -35,10 +35,6 @@ class ListPanel extends Component {
     })
   }
 
-  preventDefault(e) {
-    // e.stopPropagation()
-  }
-
   hideListPanel = () => {
     this.props.showListPanel(false)
   }
@@ -47,7 +43,7 @@ class ListPanel extends Component {
   redirectTo (index) {
     this.hideListPanel()
     this.props.hideBar(false)  //点击隐藏上下面板，调用父元素的方法
-    index = Math.min(index, 50)
+    index = Math.min(index, 50) //
     this.props.curChapterAction(index)
     setTimeout(() => {
       document.body.scrollTop = 0
@@ -57,7 +53,7 @@ class ListPanel extends Component {
 
   render() {
     return (
-      <div className={`list-panel${this.props.list_panel ? ' show': ''}`} onClick={this.preventDefault.bind(this)}>
+      <div className={`list-panel${this.props.list_panel ? ' show': ''}`}>
         <div className="list">
           <div className="list-nav">
             <i className="iconfont icon-fanhui" onClick={this.hideListPanel}></i>

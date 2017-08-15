@@ -79,9 +79,9 @@ class BookDetail extends Component {
   }
 
   toggleMore = () => {
-    this.setState({
-      showmore: !this.state.showmore
-    })
+    this.setState(prevState => ({
+      showmore: !prevState.showmore
+    }))
   }
 
   render() {
@@ -151,9 +151,6 @@ class BookDetail extends Component {
                     <Similar like={item} api={this.props.api}/>
                   </li>
                 )}
-                {/*<li v-for="(item,index) in likes">
-                  <similar :like="item"></similar>
-              </li>*/}
               </ul>
             </div>
           </div>

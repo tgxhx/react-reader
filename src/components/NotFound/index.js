@@ -2,7 +2,7 @@ import React, {Component} from 'react'
 import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
 import {bindActionCreators} from 'redux'
-import * as peopleAction from '../../actions/people-actions'
+import * as peopleAction from '../../actions/actions'
 
 import './style.css'
 

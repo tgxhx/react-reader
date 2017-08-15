@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import {bindActionCreators} from 'redux'
-import * as actions from '../../actions/people-actions'
+import * as actions from '../../actions/actions'
 import localEvent from '../../assets/js/local'
 
 import Loading from '../Loading'
@@ -28,6 +28,15 @@ class Reader extends Component {
   }
 
   componentWillMount() {
+    //初次加载时防止willupdate多次请求
+    const setFirstUpdate = (id, chapter) => {
+      this.getData(id, chapter)
+      this.props.actions.curChapter(chapter)
+      this.setState({
+        firstUpdate: true
+      })
+    }
+
     //判断本地是否存储了阅读器文字大小
     if (localEvent.StorageGetter('fz_size')) {
       this.props.actions.fzSizeModify(localEvent.StorageGetter('fz_size'))
@@ -47,11 +56,7 @@ class Reader extends Component {
         booksReadInfo: localEvent.StorageGetter('bookreaderinfo')
       }, () => {
         const chapter = this.state.booksReadInfo[id].chapter
-        this.getData(id, chapter)
-        this.props.actions.curChapter(chapter)
-        this.setState({
-          firstUpdate: true
-        })
+        setFirstUpdate(id, chapter)
       })
     } else {
       //当前书籍没有读过但是localStorage保存了其他书籍进度
@@ -59,19 +64,15 @@ class Reader extends Component {
         this.setState({
           booksReadInfo: localBookReaderInfo
         })
-        this.getData(id, 1)
-        this.props.actions.curChapter(1)
+        setFirstUpdate(id, 1)
       } else {  //第一次进入阅读
-        let info = this.state.booksReadInfo
-        info[id] = {
+        let booksReadInfo = this.state.booksReadInfo
+        booksReadInfo[id] = {
           book: id,
           chapter: 1
         }
-        this.setState({
-          booksReadInfo: info
-        })
-        this.getData(id, 1)
-        this.props.actions.curChapter(1)
+        this.setState({booksReadInfo})
+        setFirstUpdate(id, 1)
       }
     }
   }
@@ -161,14 +162,12 @@ class Reader extends Component {
   saveBooksInfo = () => {
     //可用localStorage保存每本小说阅读进度
     let id = this.props.params.id
-    let info = this.state.booksReadInfo
-    info[id] = {
+    let booksReadInfo = this.state.booksReadInfo
+    booksReadInfo[id] = {
       book: id,
       chapter: this.props.curChapter
     }
-    this.setState({
-      booksReadInfo: info
-    }, () => {
+    this.setState({booksReadInfo}, () => {
       localEvent.StorageSetter('bookreaderinfo', this.state.booksReadInfo)
     })
   }
