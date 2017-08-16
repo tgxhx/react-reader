@@ -5,7 +5,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0 0.3rem;
+  padding: 0 0.3rem 0 0;
   height: 1rem;
   background-color: #fff;
   position: relative;
@@ -31,7 +31,14 @@
       -webkit-transform: scaleY(0.5);
       transform: scaleY(0.5); } }
   .shelf header > .iconfont {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 0.8rem;
+    height: 0.8rem;
     color: #ed424b; }
+  .shelf header .checkAll {
+    margin-left: 0.3rem; }
 
 .shelf span {
   font-size: 0.28rem; }
@@ -63,13 +70,19 @@
     .shelf-item::after {
       -webkit-transform: scaleY(0.5);
       transform: scaleY(0.5); } }
-  .shelf-item:hover {
+  .shelf-item.hover {
     background-color: #f0f0f0; }
   .shelf-item .edit {
     width: 0.6rem; }
+    .shelf-item .edit .label-checkbox, .shelf-item .edit .checkbox-wrap {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 100%;
+      height: 100%; }
     .shelf-item .edit .edit-btn {
       display: none; }
-      .shelf-item .edit .edit-btn:checked + .checkbox::after {
+      .shelf-item .edit .edit-btn.checked + .checkbox-wrap .checkbox::after {
         background-color: #ed424b;
         border-radius: 100%;
         content: "";
@@ -96,11 +109,17 @@
     flex: 1;
     padding: 0.06rem 0; }
     .shelf-detail p {
+      height: 0.3rem;
       font-size: 0.28rem;
-      color: #aaa; }
+      color: #aaa;
+      overflow: hidden;
+      -ms-text-overflow: ellipsis;
+      text-overflow: ellipsis;
+      white-space: nowrap; }
       .shelf-detail p.title {
         display: flex;
-        justify-content: space-between; }
+        justify-content: space-between;
+        height: 0.36rem; }
         .shelf-detail p.title span:first-child {
           font-size: 0.32rem;
           color: #333; }
@@ -112,6 +131,10 @@
           .shelf-detail p > * .iconfont:before {
             display: inline-block;
             transform: rotate(-180deg); }
+      .shelf-detail p .icon-yonghu {
+        position: relative;
+        top: -0.02rem;
+        margin-right: 0.06rem; }
 
 .shelf footer {
   position: relative;

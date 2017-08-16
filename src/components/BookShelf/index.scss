@@ -8,13 +8,21 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 0 pr(15);
+    padding: 0 pr(15) 0 0;
     height: pr(50);
     background-color: #fff;
     @include border-1px(bottom);
     position: fixed;
     > .iconfont {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width:pr(40);
+      height:pr(40);
       color: $red;
+    }
+    .checkAll {
+      margin-left:pr(15);
     }
   }
   span {
@@ -27,22 +35,31 @@
     display: flex;
     padding: pr(16);
     @include border-1px(bottom);
-    &:hover {
+    &.hover {
       background-color: #f0f0f0;
     }
     .edit {
       width:pr(30);
+      .label-checkbox {
+        @include dfcc;
+        @include wh(100%, 100%);
+      }
+      .checkbox-wrap {
+        @extend .label-checkbox;
+      }
       .edit-btn {
         display: none;
-        &:checked + .checkbox {
-          &::after {
-            background-color: $red;
-            border-radius: 100%;
-            content: "";
-            display: inline-block;
-            height: 12px;
-            margin: 2px;
-            width: 12px;
+        &.checked + .checkbox-wrap {
+          .checkbox {
+            &::after {
+              background-color: $red;
+              border-radius: 100%;
+              content: "";
+              display: inline-block;
+              height: 12px;
+              margin: 2px;
+              width: 12px;
+            }
           }
         }
       }
@@ -69,11 +86,14 @@
       flex:1;
       padding: pr(3) 0;
       p {
+        height:pr(15);
         font-size:pr(14);
         color:#aaa;
+        @include ell;
         &.title {
           display: flex;
           justify-content:space-between;
+          height:pr(18);
           span:first-child {
             font-size:pr(16);
             color:#333;
@@ -89,6 +109,11 @@
               transform: rotate(-180deg);
             }
           }
+        }
+        .icon-yonghu {
+          position: relative;
+          top:pr(-1);
+          margin-right:pr(3);
         }
       }
     }

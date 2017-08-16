@@ -106,12 +106,14 @@ class BookDetail extends Component {
       name: detail.name,
       author: detail.author,
       images: detail.images,
-      recent: 1
+      recent: '',
+      checked: false
     }
     this.state.shelf.push(bookInfo)
     localEvent.StorageSetter('bookShelf', this.state.shelf)
     this.setState({addShelf: true})
   }
+
 
   render() {
     const {bookDetail, showmore, loading, likes, hasRead, addShelf} = this.state

@@ -15,4 +15,29 @@ const store = createStore(
     compose(applyMiddleware(thunk))
 )
 
+if (process.env.NODE_ENV !== "production") {
+  if (module.hot) {
+    module.hot.accept('./reducers', () => {
+      store.replaceReducer(rootReducer)
+    })
+  }
+}
+
+/*const store = () => {
+  const storeConfig  = createStore(
+    rootReducer,
+    initialState,
+    enhancers,
+    compose(applyMiddleware(thunk))
+  )
+  /!*if (process.env.NODE_ENV !== "production") {
+    if (module.hot) {
+      module.hot.accept('./reducers', () => {
+        store.replaceReducer(rootReducer)
+      })
+    }
+  }*!/
+  return storeConfig
+}*/
+
 export default store

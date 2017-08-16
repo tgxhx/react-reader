@@ -17,3 +17,15 @@ ReactDOM.render(
     document.getElementById('root')
 );
 
+if (module.hot) {
+  module.hot.accept('./components/App', () => {
+    ReactDOM.render(
+      <Provider store={store}>
+        <Routes history={hashHistory}/>
+      </Provider>,
+      document.getElementById('root'),
+    )
+  })
+}
+
+

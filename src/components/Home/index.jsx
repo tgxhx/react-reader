@@ -1,4 +1,5 @@
 import React, {Component} from 'react'
+import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
 import {Link} from 'react-router'
 
@@ -11,12 +12,15 @@ import Loading from '../Loading'
 class Home extends Component {
   constructor() {
     super()
-
     this.state = {
       type: ['玄幻', '修真', '都市', '历史', '游戏'],
       booklist: [],
       loading: false
     }
+  }
+
+  static contextTypes = {
+    router: PropTypes.object
   }
 
   componentDidMount() {
@@ -66,7 +70,7 @@ class Home extends Component {
         <div>
           <div className="home-header">
             <img src="http://qidian.gtimg.com/qdm/img/logo-qdm.0.50.svg" alt=""/>
-            <i className="iconfont icon-bookshelf"></i>
+            <i className="iconfont icon-bookshelf" onClick={() => this.context.router.push(`/bookshelf`)}></i>
           </div>
           <Swiper/>
           <nav className="home-nav">

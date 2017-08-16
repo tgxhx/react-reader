@@ -23,7 +23,10 @@ class Reader extends Component {
       content: [],
       bar: false,
       booksReadInfo: {},
-      firstUpdate: false
+      firstUpdate: false,
+      shelfList: [], //书架信息
+      isSave: false, //是否需要保存进度
+      isInShelf: false //当前书籍是否在书架中
     }
   }
 
@@ -37,18 +40,32 @@ class Reader extends Component {
       })
     }
 
+    const id = this.props.params.id
+
+    //判断当前书籍是否在书架中
+    const bs = localEvent.StorageGetter('bookShelf')
+    if (bs && bs.some(el => el.id === +id)) {
+      this.setState({
+        shelfList: bs,
+        isInShelf: true
+      })
+      console.log(true)
+    }
+
     //判断本地是否存储了阅读器文字大小
-    if (localEvent.StorageGetter('fz_size')) {
+    const fz = localEvent.StorageGetter('fz_size')
+    if (fz) {
       this.props.actions.fzSizeModify(localEvent.StorageGetter('fz_size'))
     }
     //判断本地是否存储了阅读器主题色
-    if (localEvent.StorageGetter('bg_color')) {
+    const bg = localEvent.StorageGetter('bg_color')
+    if (bg) {
       this.props.actions.changeBG(localEvent.StorageGetter('bg_color'))
     }
 
     //加载时从localStorage中回去所有数据阅读进度
     const localBookReaderInfo = localEvent.StorageGetter('bookreaderinfo')
-    let id = this.props.params.id
+
 
     //当前书籍以前读过并有阅读进度
     if (localBookReaderInfo && localBookReaderInfo[id]) {
@@ -86,8 +103,12 @@ class Reader extends Component {
     if (nextProps.fz_size !== this.props.fz_size) {
       localEvent.StorageSetter('fz_size', nextProps.fz_size)
     }
+    //监听章节的变化
     if (nextProps.curChapter !== this.props.curChapter && this.state.firstUpdate) {
       this.getData(this.props.params.id, nextProps.curChapter)
+      this.setState({
+        isSave: true
+      })
     }
   }
 
@@ -103,6 +124,17 @@ class Reader extends Component {
           loading: false,
           title: res.title,
           content: res.content.split('-')
+        }, () => {
+          if (this.state.isInShelf && this.state.isSave) {
+            const state = this.state
+            const index = state.shelfList.findIndex(el => el.id === +this.props.params.id)
+            state.shelfList[index].recent = state.title
+            this.setState({
+              shelfList: state.shelfList
+            }, () => {
+              localEvent.StorageSetter('bookShelf', this.state.shelfList)
+            })
+          }
         })
       })
   }
