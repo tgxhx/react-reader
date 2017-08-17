@@ -18,10 +18,7 @@ class ShelfItem extends Component {
     toggleCheck: PropTypes.func.isRequired
   }
 
-  componentDidMount() {
-    console.log(this.props)
-  }
-  
+  //点击右侧时，判断时候在编辑状态，不是则跳转到书籍详情，是则选中元素进行删除
   redirect = (idx, state) => {
     if (this.props.editing) {
       this.props.toggleCheck(idx, state)
@@ -30,6 +27,7 @@ class ShelfItem extends Component {
     }
   }
 
+  //点击按钮切换选中状态
   toggleCheck = (idx, state) => {
     this.props.toggleCheck(idx, state)
   }
@@ -41,6 +39,7 @@ class ShelfItem extends Component {
         {this.props.editing &&
         <div className="edit">
           <label className="label-checkbox">
+            {/*通过item.checked的状态判断是否添加checked class，控制选中的样式*/}
             <input type="checkbox" className={`edit-btn ${item.checked && 'checked'}`}/>
             <span className="checkbox-wrap" onClick={this.toggleCheck.bind(this, this.props.idx, !item.checked)}>
               <span className="checkbox"></span>

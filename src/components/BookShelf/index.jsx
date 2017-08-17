@@ -12,9 +12,9 @@ export default class BookShelf extends Component {
   constructor() {
     super()
     this.state = {
-      editing: false,
-      shelfList: [],
-      delNum: 0
+      editing: false, //编辑状态
+      shelfList: [], //保存书架中书籍列表
+      delNum: 0 //删除按钮上的删除数字
     }
   }
 
@@ -30,12 +30,14 @@ export default class BookShelf extends Component {
     }
   }
 
+  //切换编辑状态
   toggleEdit = () => {
     this.setState(prevState => ({
       editing: !prevState.editing
     }))
   }
 
+  //编辑状态下，选择时触发，给点击的元素的checked属性设为true，并获取被选中的数量
   toggleCheck = (idx, state) => {
     const shelfList = this.state.shelfList
     shelfList[idx].checked = state
@@ -43,25 +45,24 @@ export default class BookShelf extends Component {
       this.setState({
         delNum: this.state.shelfList.filter(item => item.checked).length
       })
-      console.log(this.state.shelfList.filter(item => item.checked).length)
     })
   }
 
-  //全选
+  //全选，给shelfList的所有元素的checked设为true，再获取数组的长度
   checkAll = () => {
     let shelfList = this.state.shelfList
     shelfList = shelfList.map(item => ({...item,checked:true}))
     this.setState({shelfList}, () => {
       this.setState({
-        delNum: this.state.shelfList.filter(item => item.checked).length
+        delNum: this.state.shelfList.length
       })
     })
   }
 
+  //通过filter，过滤掉checked属性为true的元素，达到删除的效果，并保存到localStorage中
   deleteBook = () => {
     let shelfList = this.state.shelfList
     shelfList = shelfList.filter(item => !item.checked)
-    console.log(shelfList)
     this.setState({shelfList, delNum: 0}, () => {
       localEvent.StorageSetter('bookShelf', this.state.shelfList)
     })

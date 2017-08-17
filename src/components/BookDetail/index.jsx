@@ -20,9 +20,9 @@ class BookDetail extends Component {
       bookDetail: {},
       likes: [],  //相似推荐
       showmore: false, //简介显示更多,
-      hasRead: false,
+      hasRead: false,  //是否有阅读进度
       shelf: [], //书架列表
-      addShelf: false
+      addShelf: false //是否在书架中
     }
   }
 
@@ -34,6 +34,7 @@ class BookDetail extends Component {
     const id = this.props.params.id
     this.getBookDetail(id)
     this.setHasRead(id)
+    //从localStorage获取书架信息保存至shelf，然后判断当前书籍是否在书架中，是则设置addShelf为true
     if (localEvent.StorageGetter('bookShelf')) {
       this.setState({
         shelf: localEvent.StorageGetter('bookShelf')
@@ -46,6 +47,7 @@ class BookDetail extends Component {
   }
 
   componentWillUpdate(nextProps) {
+    //点击底部相似书籍，监听书籍的id变化并获取内容
     const pid = nextProps.params.id
     if (pid !== this.props.params.id) {
       this.getBookDetail(pid)
@@ -68,6 +70,7 @@ class BookDetail extends Component {
       })
   }
 
+  //判断是否有阅读进度
   setHasRead(id) {
     this.setState({
       hasRead: false
@@ -89,6 +92,7 @@ class BookDetail extends Component {
     this.context.router.push('/')
   }
 
+  //书籍简介切换显示5行
   toggleMore = () => {
     this.setState(prevState => ({
       showmore: !prevState.showmore
@@ -106,8 +110,8 @@ class BookDetail extends Component {
       name: detail.name,
       author: detail.author,
       images: detail.images,
-      recent: '',
-      checked: false
+      recent: '', //阅读进度
+      checked: false  //判断删除时是否选中
     }
     this.state.shelf.push(bookInfo)
     localEvent.StorageSetter('bookShelf', this.state.shelf)
@@ -160,7 +164,7 @@ class BookDetail extends Component {
             <div className="detail-intro">
               <p
                 className={!showmore ? 'show5' : ''}
-                style={style5}
+                style={style5} //create-react-app会将-webkit-box-orient删除，所以添加到style中
                 onClick={this.toggleMore}>{bookDetail.intro}</p>
             </div>
             <div className="detail-tag">

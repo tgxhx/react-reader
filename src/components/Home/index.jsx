@@ -41,6 +41,7 @@ class Home extends Component {
       })
   }
 
+  //简单过滤列表，显示不同书籍
   filters(list, type) {
     if (!list) return ''
     switch (type) {
