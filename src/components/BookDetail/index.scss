@@ -192,3 +192,27 @@
     font-size:pr(14);
   }
 }
+
+.rate-score {
+  display: flex;
+  align-items: center;
+  font-size:16px;
+  .star-item {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    background-size: 100% 100%;
+    &.on {
+      background: url("./star_on.png");
+    }
+    &.half {
+      background: url("./star_half.png");
+    }
+    &.off {
+      background: url("./star_off.png");
+    }
+    &:last-of-type {
+      margin-right:10px;
+    }
+  }
+}

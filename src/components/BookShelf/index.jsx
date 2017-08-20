@@ -1,7 +1,5 @@
 import React, {Component} from 'react'
 import PropTypes from 'prop-types'
-import {connect} from 'react-redux'
-import {Link} from 'react-router'
 import localEvent from '../../assets/js/local'
 
 import ShelfItem from './ShelfItem'

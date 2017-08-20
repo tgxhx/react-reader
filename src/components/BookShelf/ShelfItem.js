@@ -1,12 +1,7 @@
 import React, {Component} from 'react'
 import PropTypes from 'prop-types'
-import nzhcn from 'nzh/cn'
 
 class ShelfItem extends Component {
-  constructor(props) {
-    super(props)
-  }
-
   static contextTypes = {
     router: PropTypes.object
   }

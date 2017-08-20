@@ -154,3 +154,21 @@
   .similar p {
     margin-top: 0.1rem;
     font-size: 0.28rem; }
+
+.rate-score {
+  display: flex;
+  align-items: center;
+  font-size: 16px; }
+  .rate-score .star-item {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    background-size: 100% 100%; }
+    .rate-score .star-item.on {
+      background: url("./star_on.png"); }
+    .rate-score .star-item.half {
+      background: url("./star_half.png"); }
+    .rate-score .star-item.off {
+      background: url("./star_off.png"); }
+    .rate-score .star-item:last-of-type {
+      margin-right: 10px; }

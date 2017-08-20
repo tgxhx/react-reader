@@ -7,6 +7,7 @@ import localEvent from '../../assets/js/local'
 import Similar from './Similar'
 import imgError from '../../assets/js/imgError'
 import Loading from '../Loading'
+import Rating from './Rating'
 
 import './index.css'
 
@@ -39,7 +40,7 @@ class BookDetail extends Component {
       this.setState({
         shelf: localEvent.StorageGetter('bookShelf')
       }, () => {
-        if (this.state.shelf.find(el => el.id == id)) {
+        if (this.state.shelf.find(el => el.id === +id)) {
           this.setState({addShelf: true})
         }
       })
@@ -144,7 +145,7 @@ class BookDetail extends Component {
                 <p className="author">作者：{bookDetail.author}</p>
                 <p className="type">分类：{bookDetail.type}</p>
                 <p className="word-count">{bookDetail.wordcount}万字</p>
-                {/*<rate :score="bookDetail.ratings"></rate>*/}
+                <Rating score={bookDetail.ratings}/>
               </div>
             </div>
             <div className="read-btn">
