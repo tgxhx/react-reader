@@ -91,7 +91,7 @@
 .page-up {
   position: fixed;
   width: 100%;
-  height: 40%;
+  height: 35%;
   top: 0;
   color: rgba(0, 0, 0, 0.1);
   z-index: 5; }
@@ -99,14 +99,14 @@
 .click-mask {
   position: fixed;
   width: 100%;
-  height: 20%;
+  height: 25%;
   top: 35%;
   color: rgba(0, 0, 0, 0.1); }
 
 .page-down {
   position: fixed;
   width: 100%;
-  height: 40%;
+  height: 30%;
   bottom: 65px;
   color: rgba(0, 0, 0, 0.1);
   z-index: 5; }

@@ -67,7 +67,7 @@ class Home extends Component {
     return (
       <div className="home">
         {loading && <Loading/>}
-        {!loading &&
+
         <div>
           <div className="home-header">
             <img src="http://qidian.gtimg.com/qdm/img/logo-qdm.0.50.svg" alt=""/>
@@ -84,13 +84,16 @@ class Home extends Component {
               </Link>
             )}
           </nav>
-          <Recommend booklist={this.filters(booklist, 'hot')} title="热门小说"/>
-          <Recommend booklist={this.filters(booklist, 'top')} title="排行榜"/>
-          <Recommend booklist={this.filters(booklist, 'free')} title="限时免费"/>
-          <BookList booklist={this.filters(booklist, 'new')} title="新书抢鲜"/>
-          <BookList booklist={this.filters(booklist, 'end')} title="畅销完本"/>
-          <BookList booklist={this.filters(booklist, 'like')} title="猜你喜欢"/>
-        </div>}
+          {!loading &&
+          <div>
+            <Recommend booklist={this.filters(booklist, 'hot')} title="热门小说"/>
+            <Recommend booklist={this.filters(booklist, 'top')} title="排行榜"/>
+            <Recommend booklist={this.filters(booklist, 'free')} title="限时免费"/>
+            <BookList booklist={this.filters(booklist, 'new')} title="新书抢鲜"/>
+            <BookList booklist={this.filters(booklist, 'end')} title="畅销完本"/>
+            <BookList booklist={this.filters(booklist, 'like')} title="猜你喜欢"/>
+          </div>}
+        </div>
       </div>
     )
   }
