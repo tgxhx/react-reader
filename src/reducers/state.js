@@ -1,5 +1,6 @@
 export default {
-  api: 'http://39.108.14.248:3333',
+  // api: 'http://39.108.14.248:3333',
+  api: '/book',
   font_panel: false,
   font_icon: false,
   bg_color: 1,

@@ -67,7 +67,6 @@ class Home extends Component {
     return (
       <div className="home">
         {loading && <Loading/>}
-
         <div>
           <div className="home-header">
             <img src="http://qidian.gtimg.com/qdm/img/logo-qdm.0.50.svg" alt=""/>
